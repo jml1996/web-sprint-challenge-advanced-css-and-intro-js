@@ -237,14 +237,14 @@ Create a function called get20s() that takes data as an argument and returns an 
 
 function get20s(arr){
   const twenties = [];
-  for (let i = 0; i < artists.length; i++){
-      const yearsAdjust = artists[i].years.split(" ");
+  for (let i = 0; i < arr.length; i++){
+      const yearsAdjust = arr[i].years.split(" ");
       const milBorn = yearsAdjust[0][0];
       const centBorn = yearsAdjust[0][1];
       const milDied = yearsAdjust[2][0];
       const centDied = yearsAdjust[2][1];
       if(milBorn == 1 && centBorn == 9 && milDied == 1 && centDied == 9){
-          twenties.push(artists[i].name);
+          twenties.push(arr[i].name);
       }
   }
   return twenties;
@@ -348,28 +348,49 @@ The function should console.log 50 chunks of HTML code that match the structure 
 
 ‼️ You do **NOT** need to get these to display on your page, but you can copy and paste the result into your HTML file if you'd like to see what that would look like. */
 
-function getHTML(/* Code here */){
-
-    /* Code here */
-
+function getHTML(data){
+  const out = [];
+  for (let i = 0; i < data.length; i++){
+    out.push(`<div id="artist"><div class="image"><img src="#"/></div><div class = "name"><a href="${data[i].wikipedia}"> ${data[i].name}</a></div><div class = "bio">${data[i].bio}</div></div>`);
   }
+  return out;
+}
+
+console.log(getHTML(artists));
 
 
 /* 💪💪💪💪💪💪 STRETCH 2: 💪💪💪💪💪💪
 Create a function called `randomize` that takes a data array as an argument and returns a the same array in a randomized order. */
 
-function randomize(/* Code here */){
-
-    /* Code here */
-
+function randomize(arr){
+  let random = [];
+  let count = arr.length;
+  for (let i = 0; i < count; i++){
+    // var remainingLength = arr.length;
+    let randIndex = Math.floor(Math.random() * (arr.length + 1));
+    random.push(arr.splice(randIndex, 1));
   }
+  return random;
+}
 
+// console.log(randomize(artists));
 
  /* 💪💪💪💪💪💪 STRETCH 3: 💪💪💪💪💪💪
  Use advanced array methods (.map, .reduce, .filer) to refactor your MVP code (create an array of all artists born in the 1900s with .filter, for example) */
 
  
- 
+let twenties = [];
+artists.filter(function(item) {
+    const yearsAdjust = item.years.split(" ");
+    const milBorn = yearsAdjust[0][0];
+    const centBorn = yearsAdjust[0][1];
+    const milDied = yearsAdjust[2][0];
+    const centDied = yearsAdjust[2][1];
+    if(milBorn == 1 && centBorn == 9 && milDied == 1 && centDied == 9){
+          twenties.push(item);
+      }
+    });
+console.log(twenties);
  
  /* 🛑🛑🛑🛑🛑 Please do not modify anything below this line 🛑🛑🛑🛑🛑*/
  function foo(){
